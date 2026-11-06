@@ -1,6 +1,6 @@
 {
   "name": "dsh-context-selector",
-  "version": "1.6.1",
+  "version": "1.6.3",
   "description": "Per-row context checkbox selector + document/selection right-click Ask AI for DeepSeek Harness.",
   "license": "MIT",
   "type": "module",
