@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Context Selector",
+    "description": "Check or uncheck turns and messages to control whether they are included in subsequent outgoing LLM context."
+  }
+}

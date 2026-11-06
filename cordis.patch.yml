@@ -1,0 +1,4 @@
+- insert:
+    - id: context-selector
+      name: 'dsh-context-selector'
+      config: {}
