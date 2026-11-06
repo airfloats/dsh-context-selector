@@ -1,7 +1,7 @@
 {
   "name": "dsh-context-selector",
-  "version": "1.4.0",
-  "description": "Per-row context checkbox selector for DeepSeek Harness: check to include, uncheck to omit user messages, assistant replies, or individual tool calls on the next request, with live ContextMeter synchronization.",
+  "version": "1.6.1",
+  "description": "Per-row context checkbox selector + document/selection right-click Ask AI for DeepSeek Harness.",
   "license": "MIT",
   "type": "module",
   "icon": "./icon.svg",
@@ -52,7 +52,9 @@
         "@deepseek-ai/dsh-client-ui-session",
         "@deepseek-ai/dsh-client-ui-conversation",
         "@deepseek-ai/dsh-client-ui-chat",
-        "@deepseek-ai/dsh-client-ui-tool"
+        "@deepseek-ai/dsh-client-ui-tool",
+        "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+        "@deepseek-ai/dsh-client-ui-sidebar-files"
       ]
     }
   }
