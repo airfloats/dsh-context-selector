@@ -1,45 +1,82 @@
 # dsh-context-selector
 
-[中文](./README.md) | **English**
+**Language / 语言**: [简体中文](./README.md) | **English**
 
-Per-row context checkbox selector plugin for **DeepSeek Harness (DSH)** Web UI. Adds inline checkboxes on the left side of every user prompt, process group, individual tool call (`read`, `glob`, `grep`, `pwsh`/`bash`, etc.), and assistant response.
-
-- **Checked `☑` (Default)**: Included in subsequent outgoing LLM requests.
-- **Unchecked `☐`**: Omitted from subsequent LLM requests while keeping the transcript visible in the UI, and immediately updates the bottom **`Context Used XX%`** meter.
+**dsh-context-selector** is a **custom context selection and management plugin** built for **DeepSeek Harness (DSH)**.  
+It lets you **selectively choose which parts of your chat history are sent to subsequent turns**—whether whole turns, individual user/assistant messages, specific tool call outputs, or system prompt sections—giving you full, fine-grained control over your context window.
 
 ---
 
-## Features
+## Key Features
 
-1. **Inline Left-Side Checkboxes on Every Row**
-   - **Sent User Messages**: Toggle `☑ Sent` on the left of any user message row.
-   - **Process Groups & Individual Tool Calls**: Toggle an entire tool group or expand it to uncheck specific heavy tool outputs (e.g. a large file read). Paired `tool-call` blocks and `tool/result` messages are cleanly stripped together so provider APIs never fail on orphaned tool IDs.
-   - **Received Assistant Replies**: Toggle `☑ Received (~XX tok)` above any assistant response.
+- **Selective Chat History Sending (Turn / Message / Tool Level)**  
+  Switch seamlessly between **Capsule** and **List** views. Toggle entire turns with one click, or hover over any turn to preview its contents on the right and individually include/exclude **User Messages**, **Tool Calls**, or **AI Replies**. Built-in quick actions include `All`, `Last 1/3/5`, `Prune Old Tools`, `None`, `Cutoff From Turn`, and `Ephemeral Next Turn`.
+- **Custom System Prompt & Live Mode Switching**  
+  Switch system prompt presets mid-session or **append / completely replace** the system prompt with your own custom instructions—and even toggle individual system prompt paragraphs on or off—taking effect immediately on the next turn.
+- **Context Usage Inspector & Per-Item Toggles**  
+  Click the context usage ring in the bottom status bar to inspect exact token usage across **System Prompt**, **Tool Definitions**, and **Conversation Messages**, filter by category, and toggle individual messages or tool outputs.
+- **Right-Click "Ask AI" on Files & Text Selections**  
+  Right-click any file, folder, document preview, or selected text to quote and reference it directly in the chat input.
 
-2. **Real-Time Context Meter Synchronization**
-   - Checking or unchecking any item immediately recalculates saved tokens and updates the live `contextPressure` and `contextBreakdown` projections in the composer bar.
+---
 
-3. **One-Click History Cutoff for Long Conversations**
-   - **`✂ Keep from here` (`✂ 以上全不带`)**: Next to every user message (from Turn 2 onwards), click **`✂ 以上全不带`** to uncheck all earlier turns above it in one click—no need to scroll up through dozens of turns.
-   - **`Shift + Click` Range Selection**: Hold `Shift` and click two tool checkboxes to batch-toggle the entire range between them.
-   - **`Omit Old Tool Outputs`**: Keep all user questions and assistant replies across history, while stripping heavy historical tool outputs (`read`, `grep`, `glob`, shell logs) from earlier turns.
+## Screenshots
 
-4. **Composer Toolbar & Slash Commands**
-   - **`Keep in context` / `Send once only`**: Send a one-off prompt that automatically unchecks itself after the turn finishes.
-   - **Overview Drawer**: One-click **Check All**, **Uncheck All**, **Keep Last 5 / 3 / 1**, or **Omit Old Tool Outputs**.
-   - **Slash Commands**: `/ctx`, `/ctx from <N>`, `/ctx last <N>`, `/ctx notools [N]`, `/ctx toggle <N>`, `/ctx none`, `/ctx all`, `/ctx once`.
+### 1. Context Selector Panel (Capsule & List Views + Hover Preview)
+
+Open the **Context Selector** popover above the composer to switch between **Capsule** and **List** views, and hover over any turn to preview and toggle its individual messages and tool calls:
+
+![Context Selector - Capsule View & Hover Preview](./docs/context-capsules.png)
+
+![Context Selector - List View & Hover Preview](./docs/context-list.png)
+
+### 2. Context Usage Inspector (Per-Message Toggles & Tool Definitions)
+
+Click the context percentage in the bottom status bar to inspect and toggle individual conversation messages/tool results or browse registered tool definitions:
+
+| Conversation Messages & Per-Item Toggles | Tool Definitions & Token Breakdown |
+| :---: | :---: |
+| ![Context Inspector - Messages](./docs/inspector-messages.png) | ![Context Inspector - Tool Definitions](./docs/inspector-tools.png) |
 
 ---
 
 ## Installation
 
-```bash
-# Install from tarball
-dsh plugin add /path/to/dsh-context-selector-1.9.0.tgz
+### Option 1: Install via DSH Plugin Manager (Recommended)
 
-# Or install from GitHub repository
-dsh plugin add git+https://github.com/airfloats/dsh-context-selector.git
-```
+1. Open DeepSeek Harness Settings -> **Plugins**.
+2. Upload the release package `dsh-context-selector-2.2.0.tgz`.
+3. Enable the plugin and refresh the page.
+
+### Option 2: Manual Installation
+
+1. Extract or clone this repository into:
+   - Windows: `%USERPROFILE%\.dsh\profiles\web\vendor\dsh-context-selector`
+   - macOS / Linux: `~/.dsh/profiles/web/vendor/dsh-context-selector`
+2. Add the plugin entry to `~/.dsh/profiles/web/cordis.patch.yml`:
+   ```yaml
+   - insert:
+       - id: context-selector
+         name: 'dsh-context-selector'
+         config: {}
+   ```
+3. Restart DeepSeek Harness.
+
+---
+
+## Slash Commands (Optional)
+
+| Command | Description |
+| :--- | :--- |
+| `/ctx` or `/ctx list` | Show current turn selection status and token summary |
+| `/ctx all` / `/ctx none` | Include all turns / Exclude all history turns |
+| `/ctx last <N>` | Keep only the last `N` turns (e.g., `/ctx last 3`) |
+| `/ctx from <M>` | Cutoff history before turn `M` |
+| `/ctx toggle <N>` | Toggle inclusion of turn `N` |
+| `/ctx tools [N]` | Exclude tool call outputs from older turns, keeping only the last `N` turns |
+| `/ctx once [on\|off]` | Toggle ephemeral mode for the next turn |
+
+---
 
 ## License
 
