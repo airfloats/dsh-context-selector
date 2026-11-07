@@ -51,7 +51,7 @@ DeepSeek Harness (DSH) 上下文按行勾选控制插件：在对话界面的每
 
 ```bash
 # 通过本地 tarball 安装
-dsh plugin add /path/to/dsh-context-selector-1.8.0.tgz
+dsh plugin add /path/to/dsh-context-selector-1.9.0.tgz
 
 # 或通过 Git 仓库安装
 dsh plugin add git+https://github.com/airfloats/dsh-context-selector.git

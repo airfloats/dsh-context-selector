@@ -35,7 +35,7 @@ Per-row context checkbox selector plugin for **DeepSeek Harness (DSH)** Web UI. 
 
 ```bash
 # Install from tarball
-dsh plugin add /path/to/dsh-context-selector-1.8.0.tgz
+dsh plugin add /path/to/dsh-context-selector-1.9.0.tgz
 
 # Or install from GitHub repository
 dsh plugin add git+https://github.com/airfloats/dsh-context-selector.git
