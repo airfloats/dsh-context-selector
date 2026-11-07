@@ -45,7 +45,7 @@
 ### 方式一：通过 DSH 插件管理器安装（推荐）
 
 1. 打开 DeepSeek Harness 设置 -> **Plugins（插件）**。
-2. 点击上传并选择发布包 `dsh-context-selector-2.3.2.tgz`。
+2. 点击上传并选择发布包 `dsh-context-selector-2.4.0.tgz`。
 3. 启用插件后刷新页面即可使用。
 
 ### 方式二：手动安装到 DSH Profile
