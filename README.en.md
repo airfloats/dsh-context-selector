@@ -45,7 +45,7 @@ Click the context percentage in the bottom status bar to inspect and toggle indi
 ### Option 1: Install via DSH Plugin Manager (Recommended)
 
 1. Open DeepSeek Harness Settings -> **Plugins**.
-2. Upload the release package `dsh-context-selector-2.2.1.tgz`.
+2. Upload the release package `dsh-context-selector-2.3.0.tgz`.
 3. Enable the plugin and refresh the page.
 
 ### Option 2: Manual Installation
